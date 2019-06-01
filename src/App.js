@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-function App() {
-  return (
-    <div className="app_container">
-      <h1>Tricky Clicks!</h1>
-    </div>
-  );
+import './App.css';
+
+// Components
+import Header from './components/header';
+
+class App extends Component {
+  render() {
+    return (
+      <div className="app_container">
+        {/* <Header /> */}
+
+
+      </div>
+    );
+  }
 }
 
 export default App;
