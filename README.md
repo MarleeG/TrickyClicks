@@ -7,3 +7,4 @@ JavaScript
 React Bootstrap
 Bootstrap
 Semantic UI
+Google Fonts
