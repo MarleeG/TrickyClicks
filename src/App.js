@@ -5,6 +5,7 @@ import './App.css';
 
 // Components
 import Header from './components/header';
+import Characters from './components/characters';
 
 class App extends Component {
   render() {
@@ -16,6 +17,13 @@ class App extends Component {
               <Header />
             </Col>
           </Row>
+          <Row>
+            <Col lg={12}>
+              <Characters />
+            </Col>
+          </Row>
+          
+        
         </Container>
         
 
