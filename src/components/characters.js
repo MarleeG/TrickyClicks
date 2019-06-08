@@ -7,9 +7,10 @@ const CharacterStyles = {
     borderStyle: 'solid'
 }
 const Characters = props => {
+    console.log(props.characters[0]);
     return(
         <div style={CharacterStyles} className='mt-5 mx-auto text-center'>
-            I'm the character list
+            <img src={props.characters[0].src} alt={props.characters[0].alt}/>
         </div>
     )
 }
