@@ -38,50 +38,39 @@ class App extends Component {
   }
 
   generateNewCharacterOrder = character_array => {
-    log('character array: ', character_array)
-    // assign the value of the character_array to characters_copy
-    // let characters_copy = character_array;
+    // Example Data
     // character_array = [{alt: '', src: '', clicked: bool}]
     let new_character_order = [];
 
     // indices that have been chosen already
     let index_tracker = [];
     let max = 0;
-    debugger;
 
-    // While the length of the index_tracker is less than or equal to 9
-    log(`${index_tracker.length} >= 9 :: ${index_tracker.length <= 9}`)
-    while(index_tracker.length <= 9 || max >= 11){
+    // Continue the loop while the max is less than or equal to character_array's length - 1
+    while(max <= (character_array.length - 1)){
+
       // Generates a random whole number between 0-8
-      max++;
       let random_idx = Math.floor(Math.random() * 9);
-      log('random_idx: ', random_idx)
-      log('length: ', index_tracker.length)
 
-
-      // if the random index chosen does not exist,
-      log(`${index_tracker.indexOf(random_idx)} === -1`);
-      if (index_tracker.indexOf(random_idx) === -1) {
-        // then push it to the index_tracker array
-        // index_tracker.push(random_idx);
-        index_tracker = [...index_tracker, random_idx]
+      // if the index does not exist in index_tracker array then add it to index_tracker array
+      if(index_tracker.indexOf(random_idx) === -1){
+        index_tracker = [...index_tracker, random_idx];
+        max++;
+        log('max: ', max)
       }
     }
+    
+    // log('length: ', index_tracker.length);
+    // log(`index tracker: ${index_tracker}`);
+    index_tracker.forEach(each_idx => new_character_order = [...new_character_order, character_array[each_idx]]);
 
-    if (index_tracker.length === 9) {
-      index_tracker.forEach(idx => {
-        new_character_order = [...new_character_order, character_array[idx]]
-      })
-    }
-
-    log(new_character_order)
-
+    this.setState({
+      characters: new_character_order
+    });
   }
 
-
-
   render() {
-    this.generateNewCharacterOrder(this.state.characters);
+    // this.generateNewCharacterOrder(this.state.characters);
 
     return (
       <div className="app_container">
@@ -96,12 +85,7 @@ class App extends Component {
               <Characters characters={this.state.characters} />
             </Col>
           </Row>
-
-
         </Container>
-
-
-
       </div>
     );
   }
