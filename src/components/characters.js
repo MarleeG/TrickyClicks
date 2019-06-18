@@ -10,7 +10,10 @@ const CharacterStyles = {
     borderStyle: 'solid',
     characterImage: {
         width: '200px',
-        height: 'auto'
+        height: 'auto',
+        borderStyle: 'solid',
+        borderColor: 'white',
+        borderWidth: '3px'
     }
 }
 
@@ -29,8 +32,9 @@ const Characters = props => {
                     <img 
                         src={character.src} 
                         alt={character.alt} 
-                        className='character_image mt-4'
+                        className='character_image my-2'
                         style={CharacterStyles.characterImage}
+                        onClick={() => props.handleImageClick(character.alt)}
                     />
                 </Col>
             )
@@ -40,8 +44,9 @@ const Characters = props => {
                     <img 
                         src={character.src} 
                         alt={character.alt} 
-                        className='character_image mt-4'
+                        className='character_image my-2'
                         style={CharacterStyles.characterImage}
+                        onClick={() => props.handleImageClick(character.alt)}
                     />
                 </Col>
             )
@@ -51,8 +56,9 @@ const Characters = props => {
                     <img 
                         src={character.src} 
                         alt={character.alt} 
-                        className='character_image mt-4'
+                        className='character_image my-2'
                         style={CharacterStyles.characterImage}
+                        onClick={() => props.handleImageClick(character.alt)}
                     />
                 </Col>
             )
@@ -60,7 +66,7 @@ const Characters = props => {
     })
 
     return (
-        <div style={CharacterStyles} className='mt-5 mx-auto text-center'>
+        <div style={CharacterStyles} className='mt-2 mx-auto text-center'>
             <Container>
                
 

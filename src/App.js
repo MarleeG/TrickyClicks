@@ -56,7 +56,7 @@ class App extends Component {
       if(index_tracker.indexOf(random_idx) === -1){
         index_tracker = [...index_tracker, random_idx];
         max++;
-        log('max: ', max)
+        // log('max: ', max)
       }
     }
     
@@ -67,6 +67,14 @@ class App extends Component {
     this.setState({
       characters: new_character_order
     });
+  }
+
+  // Create a function that updates the state of the application for the score
+  // when an image is clicked
+  handleImageClick = character => {
+    log(`Character: ${character}`);
+
+    this.generateNewCharacterOrder(this.state.characters);
   }
 
   render() {
@@ -82,7 +90,7 @@ class App extends Component {
           </Row>
           <Row>
             <Col lg={12}>
-              <Characters characters={this.state.characters} />
+              <Characters characters={this.state.characters} handleImageClick={char => this.handleImageClick(char)}/>
             </Col>
           </Row>
         </Container>
