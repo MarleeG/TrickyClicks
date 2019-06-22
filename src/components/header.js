@@ -10,7 +10,7 @@ const HeaderStyles = {
     },
     heading: {
         color: 'black',
-        fontSize: '60px'
+        fontSize: '60px',
     }
 }
 
@@ -28,19 +28,14 @@ const Header = (props) => {
                     </Col>
                 </Row>
                 <Row>
-                    <Col lg={6}>
+                    <Col lg={6}  md={6} sm={6} xs={6}>
                         <h4 className='float-right'>Score: {props.currentScore}</h4>
                     </Col>
-                    <Col lg={6}>
+                    <Col lg={6} md={6} sm={6} xs={6}>
                         <h4 className='float-left'>Top Score: {props.topScore}</h4>
                     </Col>
                 </Row>
-
-
             </Container>
-
-
-
         </div>
     )
 }

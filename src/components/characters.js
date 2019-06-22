@@ -1,21 +1,21 @@
 import React from 'react';
 import { Row, Container, Col } from 'react-bootstrap';
-import { Animated } from "react-animated-css";
+// import { Animated } from "react-animated-css";
 
 
 import '../App.css';
 
 const CharacterStyles = {
     color: 'white',
-    borderColor: 'white',
-    borderWidth: '1px',
-    borderStyle: 'solid',
+    // borderColor: 'white',
+    // borderWidth: '3px',
+    // borderStyle: 'dashed',
     characterImage: {
         width: '200px',
         height: 'auto',
-        borderStyle: 'solid',
-        borderColor: 'white',
-        borderWidth: '3px'
+        borderStyle: 'dashed',
+        borderColor: 'black',
+        borderWidth: '2px'
     }
 }
 
