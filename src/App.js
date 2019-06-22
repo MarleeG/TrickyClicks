@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Container } from 'react-bootstrap';
+import { Row, Col, Container, Modal, Button } from 'react-bootstrap';
 
 // Character Images
 import Poca from './images/characters/poca.jpg';
@@ -12,15 +12,12 @@ import Nakoma from './images/characters/nakoma.jpg';
 import Percy from './images/characters/percy.jpg';
 import Kocoum from './images/characters/kocoum.jpg';
 
-
 import './App.css';
 
 // Components
 import Header from './components/header';
 import Characters from './components/characters';
 import ClickAlert from './components/click_alert';
-
-const log = console.log;
 
 class App extends Component {
 
@@ -38,8 +35,18 @@ class App extends Component {
     ],
     topScore: 0,
     currentScore: 0,
-    gameAlert: { message: '', variant: '' }
+    gameAlert: { message: '', variant: '' },
+    showModal: false,
+    modalTitle: '',
+    modalBody: ''
+  }
 
+  modalContent = (title, body) => {
+    this.setState({
+      modalTitle: title,
+      modalBody: body,
+      showModal: true
+    })
   }
 
   // Handles when a user hovers an image
@@ -81,24 +88,31 @@ class App extends Component {
       if (index_tracker.indexOf(random_idx) === -1) {
         index_tracker = [...index_tracker, random_idx];
         max++;
-        // log('max: ', max)
       }
     }
 
-    // log('length: ', index_tracker.length);
-    // log(`index tracker: ${index_tracker}`);
-    index_tracker.forEach(each_idx => new_character_order = [...new_character_order, character_array[each_idx]]);
+    // gets the randomly generated indices and uses them to jumble the 
+    // character list and stores it in the new_character_order array
+    index_tracker.forEach((each_idx, index) => {
+      new_character_order = [...new_character_order, character_array[each_idx]];
 
+      // resets hover back to false for each character
+      if(index === 8){
+        new_character_order.forEach(char => {
+          char.hover = false;
+        });
+      }
+    });
+
+    // sets the new order of the characters
     this.setState({
       characters: new_character_order
     });
   }
 
-  // Create a function that updates the state of the application for the score
+  // updates the state of the application for the score
   // when an image is clicked
   handleImageClick = characterClicked => {
-    log(`Character: ${characterClicked}`);
-
     // makes a copy of characters in state
     let character_images_copy = this.state.characters;
 
@@ -109,14 +123,13 @@ class App extends Component {
       if (char.alt === characterClicked && char.clicked === false) {
         // set the clicked value to true
         char.clicked = true;
+        
 
         // add one to the currentScore
         this.setState({
           currentScore: this.state.currentScore + 1,
-          gameAlert: {message: `Correct!`, variant: 'success'}
+          gameAlert: { message: `Correct!`, variant: 'success' }
         }, () => {
-
-
           // if the topScore is less than the currentScore then
           // set the value of the currentScore to the topScore
           if (this.state.topScore < this.state.currentScore) {
@@ -125,27 +138,20 @@ class App extends Component {
               topScore: this.state.currentScore
             })
           }
-
           // if currentScore is 9 then you've won the game!
           // Ask user to play again
-          if (this.state.topScore === 9) {
-            // alert(`You've won the game!`);
-            // alert('')
-
-            // 
-
+          if (this.state.topScore === 9 || this.state.currentScore === 9) {
             this.setState({
-              gameAlert: { message: `You've won beat the game!`, variant: 'success' }
+              gameAlert: { message: `You've won the game!`, variant: 'success' },
+              showModal: true,
+              modalTitle: `Congrats!`,
+              modalBody: `You've won the game.`
             });
-
-            
           }
-
-
         });
         // if character selected by the user and character has already been clicked then..
         // do no increase score. Show alert message
-      }else if (char.alt === characterClicked && char.clicked === true){
+      } else if (char.alt === characterClicked && char.clicked === true) {
         this.setState({
           gameAlert: { message: 'Incorrect!', variant: 'danger' }
         })
@@ -155,18 +161,75 @@ class App extends Component {
     this.generateNewCharacterOrder(this.state.characters);
   }
 
-  render() {
-    // this.generateNewCharacterOrder(this.state.characters);
+  // closes modal & restarts game
+  handleClose = () => {
+    if (this.state.modalTitle !== 'Instructions') {
+      // create a copy of the characters in state
+      let characters_copy = this.state.characters;
 
+      // set default values of characters back to original values
+      characters_copy.forEach(char => {
+        char.clicked = false;
+        char.hover = false;
+      });
+
+      this.setState({
+        showModal: false,
+        gameAlert: { message: 'Game has restarted!', variant: 'success' },
+        topScore: 0,
+        currentScore: 0,
+        characters: characters_copy,
+        // modalTitle: 'Congrats!',
+        // modalBody: `You've won the game!`
+      }, () => {
+        this.generateNewCharacterOrder(this.state.characters);
+      });
+    } else {
+      this.setState({
+        showModal: false,
+      })
+    }
+  }
+
+  // Game modal
+  // This will only appear if you've won the game
+  // On close it will restart the game
+  modal = () => {
     return (
-      <div className="app_container">
+      <Modal show={this.state.showModal} onHide={this.handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>{this.state.modalTitle}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className='text-center'>{this.state.modalBody}</Modal.Body>
+        {/* <Modal.Body className='text-center'>{`You've won the game!`}</Modal.Body> */}
+
+        <Modal.Footer>
+          <Button variant="secondary" onClick={this.handleClose}>
+            Close
+        </Button>
+        </Modal.Footer>
+      </Modal>
+    )
+  }
+
+  componentDidMount(){
+    this.modalContent(
+      `Instructions`,
+      `Click on a image one time to earn earn a point. If you click on an image more than once you will not gain a point.`
+    )
+  }
+
+  render() {
+    return (
+      <div className = "app_container">
         <Container>
+          {(this.state.showModal || this.state.topScore === 9 || this.state.currentScore === 9) && this.modal()}
           {/* Header */}
           <Row>
             <Col lg={12}>
-              <Header 
-                topScore={this.state.topScore} 
-                currentScore={this.state.currentScore} 
+              <Header
+                topScore={this.state.topScore}
+                currentScore={this.state.currentScore}
               />
             </Col>
           </Row>
@@ -188,7 +251,7 @@ class App extends Component {
             </Col>
           </Row>
         </Container>
-      </div>
+      </div >
     );
   }
 }

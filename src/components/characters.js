@@ -1,7 +1,5 @@
 import React from 'react';
 import { Row, Container, Col } from 'react-bootstrap';
-// import { Animated } from "react-animated-css";
-
 
 import '../App.css';
 
@@ -19,13 +17,10 @@ const CharacterStyles = {
     }
 }
 
-
 const Characters = props => {
-    // console.log(props.characters[0]);
     let image_holder1 = [];
     let image_holder2 = [];
     let image_holder3 = [];
-
 
     props.characters.forEach((character, idx) => {
         if(idx <= 2){
@@ -38,7 +33,6 @@ const Characters = props => {
                         style={CharacterStyles.characterImage}
                         onClick={() => props.handleImageClick(character.alt)}
                         onMouseEnter={() => props.toggleHover(character.alt)}
-                        onMouseLeave={() => props.toggleHover(character.alt)}
                     />
                 </Col>
             )
@@ -52,7 +46,6 @@ const Characters = props => {
                         style={CharacterStyles.characterImage}
                         onClick={() => props.handleImageClick(character.alt)}
                         onMouseEnter={() => props.toggleHover(character.alt)}
-                        onMouseLeave={() => props.toggleHover(character.alt)}
                     />
                 </Col>
             )
@@ -66,7 +59,6 @@ const Characters = props => {
                         style={CharacterStyles.characterImage}
                         onClick={() => props.handleImageClick(character.alt)}
                         onMouseEnter={() => props.toggleHover(character.alt)}
-                        onMouseLeave={() => props.toggleHover(character.alt)}
                     />
                 </Col>
             )
@@ -76,8 +68,6 @@ const Characters = props => {
     return (
         <div style={CharacterStyles} className='mt-2 mx-auto text-center'>
             <Container>
-               
-
                 {image_holder1.length === 3 && image_holder2.length === 3 && image_holder1.length === 3 &&
                     <div>
                         <Row className='justify-content-center'>
@@ -91,10 +81,7 @@ const Characters = props => {
                         </Row>
                     </div>
                 }
-
-
             </Container>
-
         </div>
     )
 }
