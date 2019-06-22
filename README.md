@@ -11,5 +11,4 @@
 - [Semantic UI](https://semantic-ui.com)
 - [Animate.css](https://www.npmjs.com/package/react-animated-css)
 
-
 ## Deployed App - Coming Soon  
