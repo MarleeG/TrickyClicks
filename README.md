@@ -1,4 +1,4 @@
-# TrickyClicks -- UNDER CONSTRUCTION
+# TrickyClicks
 
 Inspired by my childhood Disney movie Pocahontas that I had on repeat. Click on a image one time to earn earn a point. If you click on an image more than once you will not gain a point.
 
@@ -14,4 +14,4 @@ Inspired by my childhood Disney movie Pocahontas that I had on repeat. Click on 
 - [Animate.css](https://www.npmjs.com/package/react-animated-css)
 
 ## Deployed App
-- [TrickyClicks](https://tricky-clicks.herokuapp.com/);  
+- [TrickyClicks](https://tricky-clicks.herokuapp.com/)
