@@ -25,16 +25,32 @@ class App extends Component {
 
   state = {
     characters: [
-      { alt: 'Pocahontas', src: Poca, clicked: false },
-      { alt: 'John Smith', src: JSmith, clicked: false },
-      { alt: 'Meeko', src: Meeko, clicked: false },
-      { alt: 'Flit', src: Flit, clicked: false },
-      { alt: 'Grandmother Willow', src: GMWillow, clicked: false },
-      { alt: 'Powhatan', src: PHatan, clicked: false },
-      { alt: 'Nakoma', src: Nakoma, clicked: false },
-      { alt: 'Percy', src: Percy, clicked: false },
-      { alt: 'Kocoum', src: Kocoum, clicked: false },
-    ]
+      { alt: 'Pocahontas', src: Poca, clicked: false, hover: false },
+      { alt: 'John Smith', src: JSmith, clicked: false, hover: false },
+      { alt: 'Meeko', src: Meeko, clicked: false, hover: false },
+      { alt: 'Flit', src: Flit, clicked: false, hover: false },
+      { alt: 'Grandmother Willow', src: GMWillow, clicked: false, hover: false},
+      { alt: 'Powhatan', src: PHatan, clicked: false, hover: false },
+      { alt: 'Nakoma', src: Nakoma, clicked: false, hover: false },
+      { alt: 'Percy', src: Percy, clicked: false, hover: false },
+      { alt: 'Kocoum', src: Kocoum, clicked: false, hover: false },
+    ],
+    topScore: 0,
+    currentScore: 0,
+  }
+
+  toggleHover = (character) => {
+    let characters_copy = this.state.characters;
+
+    characters_copy.forEach(char => {
+      if (char.alt === character){
+        char.hover = !char.hover;
+      }
+    });
+
+    this.setState({
+      characters: characters_copy
+    });
   }
 
   generateNewCharacterOrder = character_array => {
@@ -71,8 +87,44 @@ class App extends Component {
 
   // Create a function that updates the state of the application for the score
   // when an image is clicked
-  handleImageClick = character => {
-    log(`Character: ${character}`);
+  handleImageClick = characterClicked => {
+    log(`Character: ${characterClicked}`);
+
+    let character_images_copy = this.state.characters;
+
+    // character_array = [{alt: '', src: '', clicked: bool}]
+    character_images_copy.forEach(char => {
+      // if char is the same as the character clicked and
+      // it has not been clicked yet then...
+      if(char.alt === characterClicked && char.clicked === false){
+        // set the clicked value to true
+        char.clicked = true;
+
+        // add one to the currentScore
+        this.setState({
+          currentScore: this.state.currentScore + 1
+        }, () => {
+
+
+          // if the topScore is less than the currentScore then
+          // set the value of the currentScore to the topScore
+          if(this.state.topScore < this.state.currentScore){
+            // set the state of topScore to currentScore
+            this.setState({
+              topScore: this.state.currentScore
+            })
+          }
+
+          // if currentScore is 9 then you've won the game!
+          // Ask user to play again
+          if(this.state.currentScore === 9){
+            alert(`You've won the game!`);
+          }
+
+
+        });
+      }
+    });
 
     this.generateNewCharacterOrder(this.state.characters);
   }
@@ -85,12 +137,16 @@ class App extends Component {
         <Container>
           <Row>
             <Col lg={12}>
-              <Header />
+              <Header topScore={this.state.topScore} currentScore={this.state.currentScore}/>
             </Col>
           </Row>
           <Row>
             <Col lg={12}>
-              <Characters characters={this.state.characters} handleImageClick={char => this.handleImageClick(char)}/>
+              <Characters 
+                characters={this.state.characters} 
+                handleImageClick={char => this.handleImageClick(char)}
+                toggleHover={(x) => this.toggleHover(x)} 
+              />
             </Col>
           </Row>
         </Container>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Row, Container, Col } from 'react-bootstrap';
 
 import '../App.css';
 
@@ -6,7 +7,6 @@ const HeaderStyles = {
     container: {
         backgroundColor: 'white',
         padding: '30px',
-        // borderRadius: '70px',
     },
     heading: {
         color: 'black',
@@ -16,13 +16,31 @@ const HeaderStyles = {
 
 const Header = (props) => {
     return (
-        <div style={HeaderStyles.container} className='mt-3 mx-auto'>
-            <h1 
-                style={HeaderStyles.heading}
-                className='text-center heading-title'
-            >
-                Tricky Clicks
-            </h1>
+        <div style={HeaderStyles.container} className='mt-3 mx-auto text-center amatic'>
+            <Container>
+                <Row>
+                    <Col lg={12}>
+                        <h1
+                            style={HeaderStyles.heading}
+                        >
+                            Tricky Clicks
+                    </h1>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col lg={6}>
+                        <h4 className='float-right'>Score: {props.currentScore}</h4>
+                    </Col>
+                    <Col lg={6}>
+                        <h4 className='float-left'>Top Score: {props.topScore}</h4>
+                    </Col>
+                </Row>
+
+
+            </Container>
+
+
+
         </div>
     )
 }

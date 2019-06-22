@@ -1,12 +1,14 @@
 import React from 'react';
 import { Row, Container, Col } from 'react-bootstrap';
+import { Animated } from "react-animated-css";
+
 
 import '../App.css';
 
 const CharacterStyles = {
     color: 'white',
     borderColor: 'white',
-    borderWidth: '2px',
+    borderWidth: '1px',
     borderStyle: 'solid',
     characterImage: {
         width: '200px',
@@ -32,9 +34,11 @@ const Characters = props => {
                     <img 
                         src={character.src} 
                         alt={character.alt} 
-                        className='character_image my-2'
+                        className={character.hover ? 'character_image my-2 animated pulse': 'character_image my-2'}
                         style={CharacterStyles.characterImage}
                         onClick={() => props.handleImageClick(character.alt)}
+                        onMouseEnter={() => props.toggleHover(character.alt)}
+                        onMouseLeave={() => props.toggleHover(character.alt)}
                     />
                 </Col>
             )
@@ -44,9 +48,11 @@ const Characters = props => {
                     <img 
                         src={character.src} 
                         alt={character.alt} 
-                        className='character_image my-2'
+                        className={character.hover ? 'character_image my-2 animated pulse': 'character_image my-2'}
                         style={CharacterStyles.characterImage}
                         onClick={() => props.handleImageClick(character.alt)}
+                        onMouseEnter={() => props.toggleHover(character.alt)}
+                        onMouseLeave={() => props.toggleHover(character.alt)}
                     />
                 </Col>
             )
@@ -56,9 +62,11 @@ const Characters = props => {
                     <img 
                         src={character.src} 
                         alt={character.alt} 
-                        className='character_image my-2'
+                        className={character.hover ? 'character_image my-2 animated pulse': 'character_image my-2'}
                         style={CharacterStyles.characterImage}
                         onClick={() => props.handleImageClick(character.alt)}
+                        onMouseEnter={() => props.toggleHover(character.alt)}
+                        onMouseLeave={() => props.toggleHover(character.alt)}
                     />
                 </Col>
             )
