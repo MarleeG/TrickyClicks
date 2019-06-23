@@ -13,5 +13,9 @@ Inspired by the childhood movie Pocahontas that I kept on repeat. Click on a ima
 - [Semantic UI](https://semantic-ui.com)
 - [Animate.css](https://www.npmjs.com/package/react-animated-css)
 
+## Demo
+
+![](TrickyClicksGif.gif)
+
 ## Deployed App
 - [TrickyClicks](https://tricky-clicks.herokuapp.com/)
