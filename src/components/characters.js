@@ -3,24 +3,26 @@ import { Row, Container, Col } from 'react-bootstrap';
 
 import '../App.css';
 
-const CharacterStyles = {
-    color: 'white',
-    // borderColor: 'white',
-    // borderWidth: '3px',
-    // borderStyle: 'dashed',
-    characterImage: {
-        width: '200px',
-        height: 'auto',
-        borderStyle: 'dashed',
-        borderColor: 'black',
-        borderWidth: '2px'
-    }
-}
+
 
 const Characters = props => {
     let image_holder1 = [];
     let image_holder2 = [];
     let image_holder3 = [];
+
+    const CharacterStyles = {
+        borderColor: props.characterBorderColor,
+        borderWidth: '1px',
+        borderStyle: 'dashed',
+        characterImage: {
+            width: '200px',
+            height: 'auto',
+            borderStyle: 'dashed',
+            borderColor: 'black',
+            borderWidth: '2px'
+        }
+    }
+
 
     props.characters.forEach((character, idx) => {
         if(idx <= 2){

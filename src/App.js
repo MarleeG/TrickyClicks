@@ -38,7 +38,9 @@ class App extends Component {
     gameAlert: { message: '', variant: '' },
     showModal: false,
     modalTitle: '',
-    modalBody: ''
+    modalBody: '',
+    attemptsLeft: 3,
+    characterBorderColor: 'black'
   }
 
   modalContent = (title, body) => {
@@ -46,7 +48,7 @@ class App extends Component {
       modalTitle: title,
       modalBody: body,
       showModal: true
-    })
+    });
   }
 
   // Handles when a user hovers an image
@@ -128,6 +130,7 @@ class App extends Component {
         // add one to the currentScore
         this.setState({
           currentScore: this.state.currentScore + 1,
+          characterBorderColor: 'green',
           gameAlert: { message: `Correct!`, variant: 'success' }
         }, () => {
           // if the topScore is less than the currentScore then
@@ -153,7 +156,13 @@ class App extends Component {
         // do no increase score. Show alert message
       } else if (char.alt === characterClicked && char.clicked === true) {
         this.setState({
-          gameAlert: { message: 'Incorrect!', variant: 'danger' }
+          gameAlert: { message: 'Incorrect!', variant: 'danger' },
+          attemptsLeft: this.state.attemptsLeft - 1,
+          characterBorderColor: 'red'
+        }, () => {
+          if(this.state.attemptsLeft === 0){
+            this.modalContent('Uh-oh!', `You have no more attempts remaining. Try again to beat the game!`)
+          }
         })
       }
     });
@@ -179,8 +188,8 @@ class App extends Component {
         topScore: 0,
         currentScore: 0,
         characters: characters_copy,
-        // modalTitle: 'Congrats!',
-        // modalBody: `You've won the game!`
+        characterBorderColor: 'black',
+        attemptsLeft: 3
       }, () => {
         this.generateNewCharacterOrder(this.state.characters);
       });
@@ -230,6 +239,7 @@ class App extends Component {
               <Header
                 topScore={this.state.topScore}
                 currentScore={this.state.currentScore}
+                attemptsLeft={this.state.attemptsLeft}
               />
             </Col>
           </Row>
@@ -247,6 +257,7 @@ class App extends Component {
                 characters={this.state.characters}
                 handleImageClick={char => this.handleImageClick(char)}
                 toggleHover={(x) => this.toggleHover(x)}
+                characterBorderColor={this.state.characterBorderColor}
               />
             </Col>
           </Row>
