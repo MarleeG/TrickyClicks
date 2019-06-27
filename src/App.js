@@ -148,7 +148,7 @@ class App extends Component {
               gameAlert: { message: `You've won the game!`, variant: 'success' },
               showModal: true,
               modalTitle: `Congrats!`,
-              modalBody: `You've won the game.`
+              modalBody: `You've won the game!`
             });
           }
         });
@@ -210,7 +210,6 @@ class App extends Component {
           <Modal.Title>{this.state.modalTitle}</Modal.Title>
         </Modal.Header>
         <Modal.Body className='text-center'>{this.state.modalBody}</Modal.Body>
-        {/* <Modal.Body className='text-center'>{`You've won the game!`}</Modal.Body> */}
 
         <Modal.Footer>
           <Button variant="secondary" onClick={this.handleClose}>
