@@ -3,7 +3,6 @@
 Inspired by the childhood movie Pocahontas that I kept on repeat. Click on a image one time to earn earn a point. If you click on an image more than once you will not gain a point.
 
 ## Built With
-
 - [Javscript](https://www.javascript.com/)
 - [React](https://reactjs.org)
 - [Bootstrap](https://getbootstrap.com/)
