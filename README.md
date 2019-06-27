@@ -10,7 +10,6 @@ Inspired by the childhood movie Pocahontas that I kept on repeat. Click on a ima
 - [React Bootstrap](https://react-bootstrap.github.io)
 - [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
 - [Google Fonts](https://fonts.google.com/)
-- [Semantic UI](https://semantic-ui.com)
 - [Animate.css](https://www.npmjs.com/package/react-animated-css)
 
 ## Demo
