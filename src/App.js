@@ -13,7 +13,6 @@ import Percy from './images/characters/percy.jpg';
 import Kocoum from './images/characters/kocoum.jpg';
 
 import './App.css';
-
 // Components
 import Header from './components/header';
 import Characters from './components/characters';
