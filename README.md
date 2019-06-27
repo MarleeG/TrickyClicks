@@ -11,9 +11,5 @@ Inspired by the childhood movie Pocahontas that I kept on repeat. Click on a ima
 - [Google Fonts](https://fonts.google.com/)
 - [Animate.css](https://www.npmjs.com/package/react-animated-css)
 
-## Demo
-
-![](TrickyClicksGif.gif)
-
 ## Deployed App
 - [TrickyClicks](https://tricky-clicks.herokuapp.com/)
