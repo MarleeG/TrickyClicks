@@ -1,6 +1,6 @@
 # TrickyClicks
 
-Inspired by the childhood movie Pocahontas that I kept on repeat. Click on a image one time to earn earn a point. If you click on an image more than once you will not gain a point.
+Inspired by the childhood movie Pocahontas that I kept on repeat. Click on a image one time to earn earn a point. If you click on an image more than once you will not gain a point. Avoid clicking on image you've clicked on no more than three times to win the game. 
 
 ## Built With
 - [Javscript](https://www.javascript.com/)

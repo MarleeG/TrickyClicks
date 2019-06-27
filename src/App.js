@@ -222,7 +222,8 @@ class App extends Component {
   componentDidMount(){
     this.modalContent(
       `Instructions`,
-      `Click on a image one time to earn earn a point. If you click on an image more than once you will not gain a point.`
+      `Click on a image one time to earn a point. 
+      Avoid clicking on image you've clicked on more than three times to win the game.`
     )
   }
 
