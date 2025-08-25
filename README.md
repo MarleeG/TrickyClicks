@@ -12,5 +12,4 @@ Inspired by the childhood movie Pocahontas that I kept on repeat. Click on an im
 - [Animate.css](https://www.npmjs.com/package/react-animated-css)
 
 ## Deployed App
-- [TrickyClicks](https://tricky-clicks.herokuapp.com/)
-
+- [TrickyClicks](https://marleeg.github.io/TrickyClicks)
