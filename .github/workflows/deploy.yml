@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ master ]   # change if your default branch isn't main
+    branches: [ master ]
   workflow_dispatch:
 
 permissions:
@@ -18,22 +18,36 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
 
-      - run: npm ci
-      - run: npm run build
+      - name: Install deps
+        run: npm ci
 
-      - name: Add SPA fallback (404.html)
-        run: ./scripts/spa-fallback.sh
+      - name: Build
+        run: npm run build
 
-      - uses: actions/upload-pages-artifact@v3
+      # Make React Router work on refresh by serving index on 404
+      - name: SPA fallback (index -> 404)
+        run: |
+          if [ -d "build" ]; then cp build/index.html build/404.html; fi
+          if [ -d "dist" ]; then cp dist/index.html dist/404.html; fi
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          path: build
+          path: |
+            build
+            dist
 
   deploy:
     needs: build
@@ -42,5 +56,6 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - id: deployment
+      - name: Deploy
+        id: deployment
         uses: actions/deploy-pages@v4
