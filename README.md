@@ -13,3 +13,4 @@ Inspired by the childhood movie Pocahontas that I kept on repeat. Click on an im
 
 ## Deployed App
 - [TrickyClicks](https://tricky-clicks.herokuapp.com/)
+
