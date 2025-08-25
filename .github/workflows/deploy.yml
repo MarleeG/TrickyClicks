@@ -37,7 +37,6 @@ jobs:
       - name: SPA fallback (index -> 404)
         run: |
           if [ -d "build" ]; then cp build/index.html build/404.html; fi
-          if [ -d "dist" ]; then cp dist/index.html dist/404.html; fi
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
@@ -45,9 +44,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: |
-            build
-            dist
+          path: build   # <-- single path for CRA
 
   deploy:
     needs: build
